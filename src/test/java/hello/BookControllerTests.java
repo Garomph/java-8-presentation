@@ -13,13 +13,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class) @SpringBootTest @AutoConfigureMockMvc public class BookControllerTests {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+public class BookControllerTests {
 
 		@Autowired private MockMvc mockMvc;
 
-		@Test public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+		@Test
+		public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
 				this.mockMvc.perform(get("/book")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content").value("Hello, World!"));
-		}
 
+		}
 }

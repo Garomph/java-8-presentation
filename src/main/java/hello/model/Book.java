@@ -8,12 +8,31 @@ import lombok.Setter;
 /**
  * A simple class with a few attribute.
  */
-@NoArgsConstructor @AllArgsConstructor public class Book {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Book {
 
-		@Getter @Setter private String name;
+		/**
+		 * Name of the book.
+		 * The sky is blue
+		 */
+		@Getter
+		@Setter
+		private String name;
 
-		@Getter @Setter private String author;
+		/**
+		 * Author of the book.
+		 * Grass is green
+		 */
+		@Getter
+		@Setter
+		private String author;
 
-		@Getter @Setter private Integer year;
+		/**
+		 * year the book has been written
+		 */
+		@Getter
+		@Setter
+		private Integer year;
 
 }

@@ -35,7 +35,6 @@ public interface Dao<T> {
 		 * Modify an element in database
 		 *
 		 * @param element element to modify
-		 * @return T the updated element
 		 */
-		T modify(T element);
+		void modify(T element);
 }
