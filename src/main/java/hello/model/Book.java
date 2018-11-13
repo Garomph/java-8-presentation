@@ -1,38 +1,37 @@
 package hello.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * A simple class with a few attribute.
  */
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+@EqualsAndHashCode
+@ToString
+public class Book implements Serializable {
 
 		/**
-		 * Name of the book.
-		 * The sky is blue
+		 * The sky is blue.
 		 */
 		@Getter
 		@Setter
 		private String name;
 
 		/**
-		 * Author of the book.
-		 * Grass is green
+		 * Grass is green.
 		 */
 		@Getter
 		@Setter
-		private String author;
+		private Author author;
 
 		/**
-		 * year the book has been written
+		 * Number of copy sold.
 		 */
 		@Getter
 		@Setter
-		private Integer year;
+		private Integer sold;
 
 }

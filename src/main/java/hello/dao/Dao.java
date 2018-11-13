@@ -37,4 +37,9 @@ public interface Dao<T> {
 		 * @param element element to modify
 		 */
 		void modify(T element);
+
+		/**
+		 * Add an element
+		 */
+		void insert(T element);
 }

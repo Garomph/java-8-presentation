@@ -11,10 +11,6 @@ import java.util.List;
  */
 public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 
-		/**
-		 * Default object for initialiazing.
-		 */
-		private T object;
 
 		/**
 		 * Retrieve all elements from file.
@@ -23,7 +19,10 @@ public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 		 */
 		protected List<T> readFile() {
 				List<T> list = new ArrayList<>();
-				try (FileInputStream fis = new FileInputStream(new File(object.getClass().getName())); ObjectInputStream ois = new ObjectInputStream(fis);) {
+				try (
+						FileInputStream fis = new FileInputStream(new File(getFileName()));
+						ObjectInputStream ois = new ObjectInputStream(fis);
+				) {
 						int counter = 0;
 						while (true) {
 								list.add((T) ois.readObject());
@@ -31,7 +30,6 @@ public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 								if (counter == Integer.MIN_VALUE) {
 										break;
 								}
-
 						}
 
 				} catch (IOException ioe) {
@@ -40,8 +38,20 @@ public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 						cnfe.printStackTrace();
 				}
 
+				if (list.isEmpty()) {
+						list = createData();
+						saveElements(list);
+				}
+
 				return list;
 		}
+
+		/**
+		 * Return a set of Data
+		 *
+		 * @return
+		 */
+		protected abstract List<T> createData();
 
 		/**
 		 * Update the file with the list of element in argument.
@@ -49,7 +59,10 @@ public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 		 * @param elements the list of elements to save
 		 */
 		protected void saveElements(final List<T> elements) {
-				try (FileOutputStream fos = new FileOutputStream(new File(elements.getClass().getName())); ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+				try (
+						FileOutputStream fos = new FileOutputStream(new File(getFileName()));
+						ObjectOutputStream oos = new ObjectOutputStream(fos);
+				) {
 
 						for (T element : elements) {
 								oos.writeObject(element);
@@ -59,4 +72,11 @@ public abstract class AbstractFileDao<T extends Object> implements Dao<T> {
 						exception.printStackTrace();
 				}
 		}
+
+		/**
+		 * Return the name of the file used to save elements
+		 *
+		 * @return the name of the file
+		 */
+		protected abstract String getFileName();
 }

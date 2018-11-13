@@ -24,6 +24,5 @@ public class BookControllerTests {
 		public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
 				this.mockMvc.perform(get("/book")).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$.content").value("Hello, World!"));
-
 		}
 }
